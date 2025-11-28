@@ -124,7 +124,7 @@ const DocumentationApp = () => {
             <div className="bg-slate-800/50 rounded-xl p-8 border-2 border-dashed border-emerald-500/30 text-center">
               <span className="text-5xl mb-4 block">🗺️</span>
               <h3 className="text-xl font-semibold text-white mb-2">Network Topology Diagram</h3>
-              <p className="text-gray-500 mb-4">Upload your topology diagram here</p>
+              <img className='my-4' src="https://res.cloudinary.com/andela-hodal/image/upload/v1764368883/it_infranstracture/kkiyizvrwtnzb0bjzzz6.jpg" alt="" />
               <div className="flex justify-center gap-4 flex-wrap">
                 <div className="px-4 py-2 bg-blue-500/20 rounded-lg">
                   <span className="text-xs text-gray-400">LAN1</span>
