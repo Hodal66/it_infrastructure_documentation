@@ -50,7 +50,7 @@ const DocumentationApp = () => {
     </div>
   );
 
-  const EvidenceCard = ({ title, timestamp, description, command }) => (
+  const EvidenceCard = ({ title, timestamp, description, command, img }) => (
     <div className="bg-slate-800/50 rounded-lg p-4 mb-3 border border-slate-700">
       <div className="flex justify-between items-start mb-2">
         <h4 className="text-emerald-400 font-medium">{title}</h4>
@@ -59,7 +59,7 @@ const DocumentationApp = () => {
       <p className="text-gray-400 text-sm mb-3">{description}</p>
       <div className="bg-slate-950 rounded-lg p-3 border border-dashed border-slate-600 text-center mb-3">
         <span className="text-2xl mb-2 block">🖼️</span>
-        <span className="text-gray-500 text-sm">Upload screenshot here</span>
+        <span className="text-gray-500 text-sm"><img src={img} alt={description} /></span>
       </div>
       {command && (
         <div className="bg-slate-950 rounded-lg overflow-hidden">
@@ -186,26 +186,37 @@ const DocumentationApp = () => {
               <h2 className="text-2xl font-bold text-white mb-2">pfSense Firewall Configuration</h2>
               <p className="text-gray-400">Complete firewall setup including interfaces, NAT, DHCP, and firewall rules.</p>
             </div>
+
+            <Section id="pf-1" title="Main Dashboard" step="1">
+              <EvidenceCard 
+                title="Main Dashboard"
+                timestamp="07-12-2025 00:32"
+                description="All Basic Description Dashboard of pfsense"
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765052963/it_infranstracture/pfsense/tv0rbvyj4zlkimconvci.png"}
+              />
+            </Section>
             
-            <Section id="pf-1" title="Interface Configuration" step="1">
+            <Section id="pf-2" title="Interface Configuration" step="2">
               <EvidenceCard 
                 title="Interfaces Assignment"
-                timestamp="YYYY-MM-DD HH:MM"
+                timestamp="07-12-2025 00:32"
                 description="Configure WAN, OPT1 (LAN1), and OPT2 (LAN2) interfaces."
                 command={`WAN: DHCP (VirtualBox NAT)\nOPT1 (LAN1): 192.168.1.1/29\nOPT2 (LAN2): 192.168.2.1/29`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765052996/it_infranstracture/pfsense/mn40pdvagig9arucavcn.png"}
               />
             </Section>
 
-            <Section id="pf-2" title="DHCP Configuration (LAN2 Only)" step="2">
+            <Section id="pf-3" title="DHCP Configuration (LAN2 Only)" step="3">
               <EvidenceCard 
                 title="DHCP Server for LAN2"
-                timestamp="YYYY-MM-DD HH:MM"
+                timestamp="07-12-2025 00:32"
                 description="Configure DHCP on OPT2 (LAN2). LAN1 uses Linux DHCP."
                 command={`Pool Range: 192.168.2.2 - 192.168.2.6\nDNS: 192.168.1.2 (AD Server)\nDomain: ${studentConfig.domain}`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765053137/it_infranstracture/pfsense/akufcnj7zdmpxnyyw4bp.png"}
               />
             </Section>
 
-            <Section id="pf-3" title="Firewall Rules" step="3">
+            <Section id="pf-4" title="Firewall Rules" step="4">
               <div className="bg-slate-800/30 rounded-lg overflow-hidden mb-4">
                 <table className="w-full text-sm">
                   <thead className="bg-slate-800/50">
@@ -233,8 +244,57 @@ const DocumentationApp = () => {
                     </tr>
                   </tbody>
                 </table>
+              
               </div>
+              <Section id="pf-4.1" title="Allow LAN1 TO COMMUNICATE WITH LAN2" step="4.1">
+              <EvidenceCard 
+                title="ALLOW_29049_LAN1_TO_LAN2"
+                timestamp="07-12-2025 00:32"
+                description="Here we have allowed LAN1 to communicate with LAN2."
+                command={`Pool Range: 192.168.2.2 - 192.168.2.6\nDNS: 192.168.1.2 (AD Server)\nDomain: ${studentConfig.domain}`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765053090/it_infranstracture/pfsense/cgfn6l614fhlsh7tfynf.png"}
+                />
             </Section>
+            <Section id="pf-4.2" title="Allow LAN2 TO COMMUNICATE WITH LAN1" step="4.2">
+              <EvidenceCard 
+                title="ALLOW_29049_LAN2_TO_LAN1"
+                timestamp="07-12-2025 00:32"
+                description="Here we have allowed LAN1 to communicate with LAN2."
+                command={`Pool Range: 192.168.2.2 - 192.168.2.6\nDNS: 192.168.1.2 (AD Server)\nDomain: ${studentConfig.domain}`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765053106/it_infranstracture/pfsense/rplynbocjrlfj3klqhvo.png"}
+                />
+            </Section>
+            <Section id="pf-4.3" title="SCHEDULES FOR KaliPentest_29049" step="4.3">
+              <EvidenceCard 
+                title="Allow Penetration Testing specified Timeline"
+                timestamp="07-12-2025 00:32"
+                description="We have allowed KaliPentest to access from between 7 december to 22 at 10:00 to 11:00"
+                command={`Between : 7 Dec - 22 Dec \n From : 10:00 - 11:00`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765053106/it_infranstracture/pfsense/rplynbocjrlfj3klqhvo.png"}
+                />
+            </Section>
+
+            <Section id="pf-4.4" title="USING ALIASES TO Block Social Media" step="4.4">
+              <EvidenceCard 
+                title="We can block Social media through different Schedule"
+                timestamp="07-12-2025 00:32"
+                description="We have used Aliases to block Social Medias from between 7 december to 22 at 09:00 to 12:00 as a work Hours and from 13:00 to 17:00"
+                command={`Between : 7 Dec - 22 Dec \n From : 09:00 - 12:00 \n and 13:00 - 17:00 as work Hours`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765053042/it_infranstracture/pfsense/cgk3uugkrmeuw6iyyxay.png"}
+                />
+            </Section>
+            <Section id="4.5" title="CONFIGURE NAT" step="4.5">
+              <EvidenceCard 
+                title="WE have Configured Outbound"
+                timestamp="07-12-2025 00:32"
+                description="To Allow Internet Communication we have enable NAT to allow all Network we have"
+                command={`NAT LAN 1 INTERNET: 192.168.1.0/29 \n NAT LAN 2 INTERNET : 192.168.2.0/29 `}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765053059/it_infranstracture/pfsense/rruijahiof1kixj3wjru.png"}
+                />
+            </Section>
+            </Section>
+
+             
           </div>
         )}
 
@@ -249,18 +309,20 @@ const DocumentationApp = () => {
             <Section id="ad-1" title="Domain Controller Installation" step="1">
               <EvidenceCard 
                 title="AD DS Installation"
-                timestamp="YYYY-MM-DD HH:MM"
+                timestamp="07-12-2025 00:32"
                 description="Install Active Directory Domain Services and promote to Domain Controller."
                 command={`Domain: ${studentConfig.domain}\nHostname: AD-${studentConfig.studentId}\nIP: 192.168.1.2/29`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064592/it_infranstracture/AD_GPO/o9gwbr1poklyq9lvi2cq.png"}
               />
             </Section>
 
             <Section id="ad-2" title="Organizational Units & Users" step="2">
               <EvidenceCard 
                 title="OU Structure"
-                timestamp="YYYY-MM-DD HH:MM"
+                timestamp="07-12-2025 00:32"
                 description="Create OUs: IT, HR, Students, Finance with sample users."
                 command={`OUs Created:\n├── IT (IT1, IT2)\n├── HR (HR1)\n├── Students (Student1)\n└── Finance (Fin1)`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064603/it_infranstracture/AD_GPO/nwojkrwxjkqqkduosqo4.png"}
               />
             </Section>
 
@@ -278,12 +340,333 @@ const DocumentationApp = () => {
                   </div>
                 ))}
               </div>
+              <Section id="ad-4" title="Organizational Units & Users" step="4">
+              <EvidenceCard 
+                title="OU Structure"
+                timestamp="07-12-2025 00:32"
+                description="We have created GPOs"
+                command={`OUs Created:\n GPO_29049_Roaming \n GPO_29049_MappedDrives\n GPO_29049_SoftwareDeploy \n GPO_29049_PasswordPolicy`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064637/it_infranstracture/AD_GPO/ou75oqmdtakfqtnmmec0.png"}
+              />
+            </Section>
             </Section>
           </div>
         )}
 
+        {activeTab === 'linux' && (
+          <div className="space-y-4">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-white mb-2">Configure Linux</h2>
+              <p className="text-gray-400">Install Linux and Connect to Server</p>
+            </div>
+            
+            <Section id="ad-1" title="Configure Linux" step="1">
+              <EvidenceCard 
+                title="Linux Successfully Installed"
+                timestamp="07-12-2025 00:32"
+                description="We have Successfully installed Linux!"
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064693/it_infranstracture/Linux_Server/ywd5hbdi3xbmqnalgs69.png"}
+              />
+            </Section>
+
+            <Section id="ad-2" title="Add Linux to Server" step="2">
+              <EvidenceCard 
+                title="Add Linux to Server"
+                timestamp="07-12-2025 00:32"
+                description="Create OUs: IT, HR, Students, Finance with sample users."
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064718/it_infranstracture/Linux_Server/xlxo7gakmmasxrx4zud0.png"}
+              />
+            </Section>
+
+              <Section id="ad-3" title="Testing Linux to be connected to pfsense" step="3">
+              <EvidenceCard 
+                title="Testing Linux"
+                timestamp="07-12-2025 00:32"
+                description="Testing Linux to be connected to pfsense"
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064730/it_infranstracture/Linux_Server/hgtggmwfmvhk6mglwjgc.png"}
+              />
+            </Section>
+          </div>
+        )}
+
+         {activeTab === 'wazuh' && (
+          <div className="space-y-4">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-white mb-2">Active Directory & Group Policy</h2>
+              <p className="text-gray-400">Windows Server domain controller, OUs, users, and GPO configuration.</p>
+            </div>
+            
+            <Section id="ad-1" title="Domain Controller Installation" step="1">
+              <EvidenceCard 
+                title="AD DS Installation"
+                timestamp="07-12-2025 00:32"
+                description="Install Active Directory Domain Services and promote to Domain Controller."
+                command={`Domain: ${studentConfig.domain}\nHostname: AD-${studentConfig.studentId}\nIP: 192.168.1.2/29`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064592/it_infranstracture/AD_GPO/o9gwbr1poklyq9lvi2cq.png"}
+              />
+            </Section>
+
+            <Section id="ad-2" title="Organizational Units & Users" step="2">
+              <EvidenceCard 
+                title="OU Structure"
+                timestamp="07-12-2025 00:32"
+                description="Create OUs: IT, HR, Students, Finance with sample users."
+                command={`OUs Created:\n├── IT (IT1, IT2)\n├── HR (HR1)\n├── Students (Student1)\n└── Finance (Fin1)`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064603/it_infranstracture/AD_GPO/nwojkrwxjkqqkduosqo4.png"}
+              />
+            </Section>
+
+            <Section id="ad-3" title="Group Policy Objects" step="3">
+              <div className="space-y-2 mb-4">
+                {[
+                  { name: `GPO_${studentConfig.studentId}_Roaming`, desc: 'Roaming profile paths' },
+                  { name: `GPO_${studentConfig.studentId}_MappedDrives`, desc: 'Map network drives' },
+                  { name: `GPO_${studentConfig.studentId}_SoftwareDeploy`, desc: 'Deploy VLC.msi, Mozilla.msi' },
+                  { name: `GPO_${studentConfig.studentId}_PasswordPolicy`, desc: 'Min 12 chars, lockout after 3 fails' },
+                ].map((gpo, i) => (
+                  <div key={i} className="flex justify-between items-center p-3 bg-slate-800/30 rounded-lg">
+                    <span className="text-emerald-400 font-mono text-sm">{gpo.name}</span>
+                    <span className="text-gray-400 text-sm">{gpo.desc}</span>
+                  </div>
+                ))}
+              </div>
+              <Section id="ad-4" title="Organizational Units & Users" step="4">
+              <EvidenceCard 
+                title="OU Structure"
+                timestamp="07-12-2025 00:32"
+                description="We have created GPOs"
+                command={`OUs Created:\n GPO_29049_Roaming \n GPO_29049_MappedDrives\n GPO_29049_SoftwareDeploy \n GPO_29049_PasswordPolicy`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064637/it_infranstracture/AD_GPO/ou75oqmdtakfqtnmmec0.png"}
+              />
+            </Section>
+            </Section>
+          </div>
+        )}
+
+        
+         {activeTab === 'ids' && (
+          <div className="space-y-4">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-white mb-2">Active Directory & Group Policy</h2>
+              <p className="text-gray-400">Windows Server domain controller, OUs, users, and GPO configuration.</p>
+            </div>
+            
+            <Section id="ad-1" title="Domain Controller Installation" step="1">
+              <EvidenceCard 
+                title="AD DS Installation"
+                timestamp="07-12-2025 00:32"
+                description="Install Active Directory Domain Services and promote to Domain Controller."
+                command={`Domain: ${studentConfig.domain}\nHostname: AD-${studentConfig.studentId}\nIP: 192.168.1.2/29`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064592/it_infranstracture/AD_GPO/o9gwbr1poklyq9lvi2cq.png"}
+              />
+            </Section>
+
+            <Section id="ad-2" title="Organizational Units & Users" step="2">
+              <EvidenceCard 
+                title="OU Structure"
+                timestamp="07-12-2025 00:32"
+                description="Create OUs: IT, HR, Students, Finance with sample users."
+                command={`OUs Created:\n├── IT (IT1, IT2)\n├── HR (HR1)\n├── Students (Student1)\n└── Finance (Fin1)`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064603/it_infranstracture/AD_GPO/nwojkrwxjkqqkduosqo4.png"}
+              />
+            </Section>
+
+            <Section id="ad-3" title="Group Policy Objects" step="3">
+              <div className="space-y-2 mb-4">
+                {[
+                  { name: `GPO_${studentConfig.studentId}_Roaming`, desc: 'Roaming profile paths' },
+                  { name: `GPO_${studentConfig.studentId}_MappedDrives`, desc: 'Map network drives' },
+                  { name: `GPO_${studentConfig.studentId}_SoftwareDeploy`, desc: 'Deploy VLC.msi, Mozilla.msi' },
+                  { name: `GPO_${studentConfig.studentId}_PasswordPolicy`, desc: 'Min 12 chars, lockout after 3 fails' },
+                ].map((gpo, i) => (
+                  <div key={i} className="flex justify-between items-center p-3 bg-slate-800/30 rounded-lg">
+                    <span className="text-emerald-400 font-mono text-sm">{gpo.name}</span>
+                    <span className="text-gray-400 text-sm">{gpo.desc}</span>
+                  </div>
+                ))}
+              </div>
+              <Section id="ad-4" title="Organizational Units & Users" step="4">
+              <EvidenceCard 
+                title="OU Structure"
+                timestamp="07-12-2025 00:32"
+                description="We have created GPOs"
+                command={`OUs Created:\n GPO_29049_Roaming \n GPO_29049_MappedDrives\n GPO_29049_SoftwareDeploy \n GPO_29049_PasswordPolicy`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064637/it_infranstracture/AD_GPO/ou75oqmdtakfqtnmmec0.png"}
+              />
+            </Section>
+            </Section>
+          </div>
+        )}
+
+
+        
+         {activeTab === 'kali' && (
+          <div className="space-y-4">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-white mb-2">Active Directory & Group Policy</h2>
+              <p className="text-gray-400">Windows Server domain controller, OUs, users, and GPO configuration.</p>
+            </div>
+            
+            <Section id="ad-1" title="Domain Controller Installation" step="1">
+              <EvidenceCard 
+                title="AD DS Installation"
+                timestamp="07-12-2025 00:32"
+                description="Install Active Directory Domain Services and promote to Domain Controller."
+                command={`Domain: ${studentConfig.domain}\nHostname: AD-${studentConfig.studentId}\nIP: 192.168.1.2/29`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064592/it_infranstracture/AD_GPO/o9gwbr1poklyq9lvi2cq.png"}
+              />
+            </Section>
+
+            <Section id="ad-2" title="Organizational Units & Users" step="2">
+              <EvidenceCard 
+                title="OU Structure"
+                timestamp="07-12-2025 00:32"
+                description="Create OUs: IT, HR, Students, Finance with sample users."
+                command={`OUs Created:\n├── IT (IT1, IT2)\n├── HR (HR1)\n├── Students (Student1)\n└── Finance (Fin1)`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064603/it_infranstracture/AD_GPO/nwojkrwxjkqqkduosqo4.png"}
+              />
+            </Section>
+
+            <Section id="ad-3" title="Group Policy Objects" step="3">
+              <div className="space-y-2 mb-4">
+                {[
+                  { name: `GPO_${studentConfig.studentId}_Roaming`, desc: 'Roaming profile paths' },
+                  { name: `GPO_${studentConfig.studentId}_MappedDrives`, desc: 'Map network drives' },
+                  { name: `GPO_${studentConfig.studentId}_SoftwareDeploy`, desc: 'Deploy VLC.msi, Mozilla.msi' },
+                  { name: `GPO_${studentConfig.studentId}_PasswordPolicy`, desc: 'Min 12 chars, lockout after 3 fails' },
+                ].map((gpo, i) => (
+                  <div key={i} className="flex justify-between items-center p-3 bg-slate-800/30 rounded-lg">
+                    <span className="text-emerald-400 font-mono text-sm">{gpo.name}</span>
+                    <span className="text-gray-400 text-sm">{gpo.desc}</span>
+                  </div>
+                ))}
+              </div>
+              <Section id="ad-4" title="Organizational Units & Users" step="4">
+              <EvidenceCard 
+                title="OU Structure"
+                timestamp="07-12-2025 00:32"
+                description="We have created GPOs"
+                command={`OUs Created:\n GPO_29049_Roaming \n GPO_29049_MappedDrives\n GPO_29049_SoftwareDeploy \n GPO_29049_PasswordPolicy`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064637/it_infranstracture/AD_GPO/ou75oqmdtakfqtnmmec0.png"}
+              />
+            </Section>
+            </Section>
+          </div>
+        )}
+
+
+        
+         {activeTab === 'ntopng' && (
+          <div className="space-y-4">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-white mb-2">Active Directory & Group Policy</h2>
+              <p className="text-gray-400">Windows Server domain controller, OUs, users, and GPO configuration.</p>
+            </div>
+            
+            <Section id="ad-1" title="Domain Controller Installation" step="1">
+              <EvidenceCard 
+                title="AD DS Installation"
+                timestamp="07-12-2025 00:32"
+                description="Install Active Directory Domain Services and promote to Domain Controller."
+                command={`Domain: ${studentConfig.domain}\nHostname: AD-${studentConfig.studentId}\nIP: 192.168.1.2/29`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064592/it_infranstracture/AD_GPO/o9gwbr1poklyq9lvi2cq.png"}
+              />
+            </Section>
+
+            <Section id="ad-2" title="Organizational Units & Users" step="2">
+              <EvidenceCard 
+                title="OU Structure"
+                timestamp="07-12-2025 00:32"
+                description="Create OUs: IT, HR, Students, Finance with sample users."
+                command={`OUs Created:\n├── IT (IT1, IT2)\n├── HR (HR1)\n├── Students (Student1)\n└── Finance (Fin1)`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064603/it_infranstracture/AD_GPO/nwojkrwxjkqqkduosqo4.png"}
+              />
+            </Section>
+
+            <Section id="ad-3" title="Group Policy Objects" step="3">
+              <div className="space-y-2 mb-4">
+                {[
+                  { name: `GPO_${studentConfig.studentId}_Roaming`, desc: 'Roaming profile paths' },
+                  { name: `GPO_${studentConfig.studentId}_MappedDrives`, desc: 'Map network drives' },
+                  { name: `GPO_${studentConfig.studentId}_SoftwareDeploy`, desc: 'Deploy VLC.msi, Mozilla.msi' },
+                  { name: `GPO_${studentConfig.studentId}_PasswordPolicy`, desc: 'Min 12 chars, lockout after 3 fails' },
+                ].map((gpo, i) => (
+                  <div key={i} className="flex justify-between items-center p-3 bg-slate-800/30 rounded-lg">
+                    <span className="text-emerald-400 font-mono text-sm">{gpo.name}</span>
+                    <span className="text-gray-400 text-sm">{gpo.desc}</span>
+                  </div>
+                ))}
+              </div>
+              <Section id="ad-4" title="Organizational Units & Users" step="4">
+              <EvidenceCard 
+                title="OU Structure"
+                timestamp="07-12-2025 00:32"
+                description="We have created GPOs"
+                command={`OUs Created:\n GPO_29049_Roaming \n GPO_29049_MappedDrives\n GPO_29049_SoftwareDeploy \n GPO_29049_PasswordPolicy`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064637/it_infranstracture/AD_GPO/ou75oqmdtakfqtnmmec0.png"}
+              />
+            </Section>
+            </Section>
+          </div>
+        )}
+
+         {activeTab === 'backups' && (
+          <div className="space-y-4">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-white mb-2">Active Directory & Group Policy</h2>
+              <p className="text-gray-400">Windows Server domain controller, OUs, users, and GPO configuration.</p>
+            </div>
+            
+            <Section id="ad-1" title="Domain Controller Installation" step="1">
+              <EvidenceCard 
+                title="AD DS Installation"
+                timestamp="07-12-2025 00:32"
+                description="Install Active Directory Domain Services and promote to Domain Controller."
+                command={`Domain: ${studentConfig.domain}\nHostname: AD-${studentConfig.studentId}\nIP: 192.168.1.2/29`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064592/it_infranstracture/AD_GPO/o9gwbr1poklyq9lvi2cq.png"}
+              />
+            </Section>
+
+            <Section id="ad-2" title="Organizational Units & Users" step="2">
+              <EvidenceCard 
+                title="OU Structure"
+                timestamp="07-12-2025 00:32"
+                description="Create OUs: IT, HR, Students, Finance with sample users."
+                command={`OUs Created:\n├── IT (IT1, IT2)\n├── HR (HR1)\n├── Students (Student1)\n└── Finance (Fin1)`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064603/it_infranstracture/AD_GPO/nwojkrwxjkqqkduosqo4.png"}
+              />
+            </Section>
+
+            <Section id="ad-3" title="Group Policy Objects" step="3">
+              <div className="space-y-2 mb-4">
+                {[
+                  { name: `GPO_${studentConfig.studentId}_Roaming`, desc: 'Roaming profile paths' },
+                  { name: `GPO_${studentConfig.studentId}_MappedDrives`, desc: 'Map network drives' },
+                  { name: `GPO_${studentConfig.studentId}_SoftwareDeploy`, desc: 'Deploy VLC.msi, Mozilla.msi' },
+                  { name: `GPO_${studentConfig.studentId}_PasswordPolicy`, desc: 'Min 12 chars, lockout after 3 fails' },
+                ].map((gpo, i) => (
+                  <div key={i} className="flex justify-between items-center p-3 bg-slate-800/30 rounded-lg">
+                    <span className="text-emerald-400 font-mono text-sm">{gpo.name}</span>
+                    <span className="text-gray-400 text-sm">{gpo.desc}</span>
+                  </div>
+                ))}
+              </div>
+              <Section id="ad-4" title="Organizational Units & Users" step="4">
+              <EvidenceCard 
+                title="OU Structure"
+                timestamp="07-12-2025 00:32"
+                description="We have created GPOs"
+                command={`OUs Created:\n GPO_29049_Roaming \n GPO_29049_MappedDrives\n GPO_29049_SoftwareDeploy \n GPO_29049_PasswordPolicy`}
+                img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064637/it_infranstracture/AD_GPO/ou75oqmdtakfqtnmmec0.png"}
+              />
+            </Section>
+            </Section>
+          </div>
+        )}
+
+
         {/* Other tabs show placeholder */}
-        {!['topology', 'pfsense', 'ad-gpo'].includes(activeTab) && (
+        {!['topology', 'pfsense', 'ad-gpo','linux','wazuh','ids','kali','vpn','ntopng','backups'].includes(activeTab) && (
           <div className="text-center py-16">
             <span className="text-6xl mb-4 block">{tabs.find(t => t.id === activeTab)?.icon}</span>
             <h2 className="text-2xl font-bold text-white mb-2">{tabs.find(t => t.id === activeTab)?.label} Documentation</h2>
@@ -292,15 +675,27 @@ const DocumentationApp = () => {
               <Section id={`${activeTab}-1`} title="Configuration Steps" step="1">
                 <EvidenceCard 
                   title="Initial Setup"
-                  timestamp="YYYY-MM-DD HH:MM"
+                  timestamp="07-12-2025 00:32"
                   description="Document your configuration steps with screenshots and commands."
+                  img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064693/it_infranstracture/Linux_Server/ywd5hbdi3xbmqnalgs69.png"}
                 />
               </Section>
-              <Section id={`${activeTab}-2`} title="Verification & Testing" step="2">
+              <Section id={`${activeTab}-2`} title="Server Setting" step="2">
+                <EvidenceCard 
+                  title="Server Setting"
+                  timestamp="07-12-2025 00:32"
+                  description="We have Configured our Server Configuration Settup!"
+                  img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064718/it_infranstracture/Linux_Server/xlxo7gakmmasxrx4zud0.png"}
+
+                />
+              </Section>
+               <Section id={`${activeTab}-3`} title="Verification & Testing" step="3">
                 <EvidenceCard 
                   title="Test Results"
-                  timestamp="YYYY-MM-DD HH:MM"
+                  timestamp="07-12-2025 00:32"
                   description="Add evidence of successful configuration and testing."
+                  img={"https://res.cloudinary.com/andela-hodal/image/upload/v1765064730/it_infranstracture/Linux_Server/hgtggmwfmvhk6mglwjgc.png"}
+
                 />
               </Section>
             </div>
